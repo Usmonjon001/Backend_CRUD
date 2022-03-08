@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Sections {
+  id Int @default(autoincrement()) @id
+  name String
+  created DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+
+model Ministries {
+  id Int @default(autoincrement()) @id
+  name String
+  created DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model GazEquipments {
+  id Int @default(autoincrement()) @id
+  name String
+  consumption Float
+  created DateTime @default(now())
+  updatedAt DateTime @default(now()) 
+}
+
+model Directions {
+  id Int @default(autoincrement()) @id
+  name String
+  created DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model CalculationService{
+  id Int @default(autoincrement()) @id
+  name String
+  fixed_price Float
+  created DateTime @default(now())
+  updatedAt DateTime @default(now()) 
+}
+
+model Rank {
+  id Int @default(autoincrement()) @id
+  name String
+  created DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Services {
+  id Int @default(autoincrement()) @id
+  name String
+  created DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Compression_Coefficients {
+  id Int @default(autoincrement()) @id
+  name String
+  created DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Activity_Type {
+  id Int @default(autoincrement()) @id
+  activity_type_account String
+  swot_type Boolean
+  name String
+  created DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model GRS_Measuring_Devices {
+  id Int @default(autoincrement()) @id
+  date DateTime? @default(now())
+  name String
+  organizations String
+  created DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Region {
+  id Int @default(autoincrement()) @id
+  change Boolean
+  name String 
+  own_districts Districts[] 
+  created DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Districts {
+  id Int @default(autoincrement()) @id
+  change Boolean
+  name String 
+  region Region @relation(fields: [region_id], references:[id])
+  region_id Int 
+  created DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
